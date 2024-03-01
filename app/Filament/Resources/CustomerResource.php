@@ -78,7 +78,7 @@ class CustomerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('city')
+                Tables\Columns\TextColumn::make('city') 
                     ->searchable(),
                 Tables\Columns\TextColumn::make('state')
                     ->searchable(),

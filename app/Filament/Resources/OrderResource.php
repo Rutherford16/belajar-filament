@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Models\Customer;
 use App\Models\Order;
+use Carbon\Carbon;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,19 +25,34 @@ class OrderResource extends Resource
 
     public static function form(Form $form): Form
     {
+
+        $getLastOrderNumber = Order::query()->orderBy('order_number', 'desc')->limit(1)->value('order_number') + 1;
+
+        // $getCustomerName = Customer::query()->value('customer_name');
+        // dd($getCustomerName);
+
         return $form
             ->schema([
-                Forms\Components\TextInput::make('customer_number')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\TextInput::make('order_number')
+                    ->default($getLastOrderNumber)
+                    ->readOnly()
+                    ->label('Order Number'),
+                Select::make('customer_number')
+                    ->searchable()
+                    ->label('Customer Name')
+                    ->options(Customer::all()->pluck('customer_name', 'customer_number')),
                 Forms\Components\DatePicker::make('order_date')
-                    ->required(),
+                    ->required()
+                    ->default(Carbon::now()->toDateTimeString()),
                 Forms\Components\DatePicker::make('required_date')
                     ->required(),
                 Forms\Components\DatePicker::make('shipped_date'),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(15),
+                Select::make('status')
+                    ->label('Status')
+                    ->options(Order::query()->distinct()->pluck('status')),
+                // Forms\Components\TextInput::make('status')
+                //     ->required()
+                //     ->maxLength(15),
                 Forms\Components\Textarea::make('comments')
                     ->maxLength(65535)
                     ->columnSpanFull(),

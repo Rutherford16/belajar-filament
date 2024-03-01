@@ -12,6 +12,15 @@ class Order extends Model
     use HasFactory;
 
     protected $primaryKey = 'order_number';
+    protected $fillable = [
+        'order_number',
+        'order_date',
+        'required_date',
+        'shipped_date',
+        'status',
+        'comments',
+        'customer_number',
+    ];
 
     public $incrementing = false;
 
@@ -24,4 +33,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_number');
     }
+
+    // public function getOrderNumber(){
+    //     return $this->order_number
+    // }
 }

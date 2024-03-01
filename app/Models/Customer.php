@@ -12,6 +12,10 @@ class Customer extends Model
 
     public $incrementing = false;
 
+    protected $fillable = [
+        'customer_number',
+    ];
+
     public function customer(): HasMany
     {
         return $this->hasMany(Order::class);

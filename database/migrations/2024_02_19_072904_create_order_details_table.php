@@ -22,7 +22,7 @@ return new class extends Migration
             $table->smallInteger('order_line_number');
             // $table->primary('order_number');
             $table->foreign('order_number')->references('order_number')->on('orders');
-            // $table->foreign('product_code')->references('product_code')->on('products');
+            // $table->foreign('product_code')->references('product_code')->on('products')->nullable()->constrained();
             $table->timestamps();
         });
     }
