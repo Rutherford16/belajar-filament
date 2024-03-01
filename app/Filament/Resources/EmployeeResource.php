@@ -57,7 +57,7 @@ class EmployeeResource extends Resource
             ->columns([
                 Split::make([
                     Stack::make([
-                        Tables\Columns\TextColumn::make('fullname')
+                        Tables\Columns\TextColumn::make('fullnameemployee')
                             ->searchable()
                             ->label('Employee Name')
                             ->size(TextColumn\TextColumnSize::Large),

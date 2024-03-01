@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
@@ -21,7 +22,12 @@ class Customer extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function getFullnameAttribute()
+    public function customerIni(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class, 'sales_rep_employee_number');
+    }
+
+    public function getFullnameCustomerAttribute()
     {
         return $this->contact_first_name . ' ' . $this->contact_last_name;
     }

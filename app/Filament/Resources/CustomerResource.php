@@ -9,7 +9,10 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -61,42 +64,44 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer_number')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sales_rep_employee_number')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('customer_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fullname')
-                    ->searchable()
-                    ->label('Contact Name'),
-                // Tables\Columns\TextColumn::make('contact_last_name')
-                //     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('city') 
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('state')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('postal_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('country')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('credit_limit')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Split::make([
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('customer_number')
+                            ->description('Customer Number', 'above')
+                            ->size(TextColumn\TextColumnSize::Large),
+                        Tables\Columns\TextColumn::make('customer_name')
+                            ->searchable()
+                            ->description('Customer Name', 'above')
+                            ->size(TextColumn\TextColumnSize::Large),
+                        Tables\Columns\TextColumn::make('fullnamecustomer')
+                            ->searchable()
+                            ->description('Contact Name', 'above')
+                            ->size(TextColumn\TextColumnSize::Large),
+                    ]),
+                    Tables\Columns\TextColumn::make('customerIni.fullnameemployee')
+                        ->description('Sales Representative', 'above')
+                        ->searchable()
+                        ->size(TextColumn\TextColumnSize::Large),
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('address')
+                        ->description('Address', 'above')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                        Tables\Columns\TextColumn::make('postal_code')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                        Tables\Columns\TextColumn::make('city')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                        Tables\Columns\TextColumn::make('state')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                        Tables\Columns\TextColumn::make('country')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                        Tables\Columns\TextColumn::make('phone')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                    ]),
+                    Tables\Columns\TextColumn::make('credit_limit')
+                        ->numeric()
+                        ->description('Credit Limit', 'above')
+                        ->size(TextColumn\TextColumnSize::Large),
+                ])
             ])
             ->filters([
                 //
@@ -105,9 +110,7 @@ class CustomerResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 

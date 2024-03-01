@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -22,7 +23,12 @@ class Employee extends Model
         return $this->belongsTo(self::class, 'report_to');
     }
 
-    public function getFullnameAttribute()
+    public function employee(): HasMany
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function getFullnameEmployeeAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
     }
