@@ -25,11 +25,7 @@ class OrderResource extends Resource
 
     public static function form(Form $form): Form
     {
-
         $getLastOrderNumber = Order::query()->orderBy('order_number', 'desc')->limit(1)->value('order_number') + 1;
-
-        // $getCustomerName = Customer::query()->value('customer_name');
-        // dd($getCustomerName);
 
         return $form
             ->schema([
@@ -50,9 +46,6 @@ class OrderResource extends Resource
                 Select::make('status')
                     ->label('Status')
                     ->options(Order::query()->distinct()->pluck('status')),
-                // Forms\Components\TextInput::make('status')
-                //     ->required()
-                //     ->maxLength(15),
                 Forms\Components\Textarea::make('comments')
                     ->maxLength(65535)
                     ->columnSpanFull(),

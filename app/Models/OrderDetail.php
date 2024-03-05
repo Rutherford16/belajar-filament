@@ -12,6 +12,14 @@ class OrderDetail extends Model
 
     // public $incrementing = false;
 
+    protected $fillable = [
+        'order_number',
+        'product_code',
+        'quantity_ordered',
+        'price_each',
+        'order_line_number',
+    ];
+
     public function orderDetail(): BelongsTo
     {
         return $this->belongsTo(Order::class, ['order_number', 'product_code']);

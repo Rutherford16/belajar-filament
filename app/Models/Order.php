@@ -33,8 +33,4 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_number');
     }
-
-    // public function getOrderNumber(){
-    //     return $this->order_number
-    // }
 }

@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
+use App\Models\Employee;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,14 +30,19 @@ class CustomerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('sales_rep_employee_number')
-                    ->numeric(),
+                    ->numeric()
+                    ->readOnly(),
+                Select::make('sales_rep_employee_number')
+                    ->searchable()
+                    ->label('Sales Representative')
+                    ->options(Employee::all()->pluck('first_name', 'employee_number')),
                 Forms\Components\TextInput::make('customer_name')
                     ->required()
                     ->maxLength(50),
-                Forms\Components\TextInput::make('contact_last_name')
+                Forms\Components\TextInput::make('contact_first_name')
                     ->required()
                     ->maxLength(50),
-                Forms\Components\TextInput::make('contact_first_name')
+                Forms\Components\TextInput::make('contact_last_name')
                     ->required()
                     ->maxLength(50),
                 Forms\Components\TextInput::make('phone')
@@ -84,18 +91,18 @@ class CustomerResource extends Resource
                         ->size(TextColumn\TextColumnSize::Large),
                     Stack::make([
                         Tables\Columns\TextColumn::make('address')
-                        ->description('Address', 'above')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->description('Address', 'above')
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                         Tables\Columns\TextColumn::make('postal_code')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                         Tables\Columns\TextColumn::make('city')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                         Tables\Columns\TextColumn::make('state')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                         Tables\Columns\TextColumn::make('country')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                         Tables\Columns\TextColumn::make('phone')
-                        ->size(TextColumn\TextColumnSize::ExtraSmall),
+                            ->size(TextColumn\TextColumnSize::ExtraSmall),
                     ]),
                     Tables\Columns\TextColumn::make('credit_limit')
                         ->numeric()

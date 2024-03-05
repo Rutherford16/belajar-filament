@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
 use App\Models\Employee;
+use App\Models\Office;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,11 +29,15 @@ class EmployeeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('office_code')
+                Select::make('office_code')
+                    ->searchable()
+                    ->label('Office')
                     ->required()
-                    ->maxLength(10),
-                Forms\Components\TextInput::make('report_to')
-                    ->numeric(),
+                    ->options(Office::all()->pluck('city', 'office_code')),
+                Select::make('report_to')
+                    ->searchable()
+                    ->label('Report To')
+                    ->options(Employee::all()->pluck('first_name', 'employee_number')),
                 Forms\Components\TextInput::make('last_name')
                     ->required()
                     ->maxLength(50),
