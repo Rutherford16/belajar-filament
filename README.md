@@ -3,10 +3,11 @@
 - Jalankan perintah ini untuk meng-clone repo di cmd 
 'gh repo clone Rutherford16/belajar-filament'
 - Lalu jalankan perintah 'npm install' dan 'composer install' untuk menginstall module yang digunakan
-- Lalu copy paste file .env
+- Lalu copy paste file .env.example direname menjadi .env
 - Kemudian jalankan perintah 'php artisan migrate:fresh --seed'
 - Jalankan perintah 'php artisan key:generate'
 - Lalu buatlah akun user filament dengan menjalankan perintah 'php artisan make:filament-user'
+- Anda sekarang dapat login dan melakukan review. Happy review.
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
