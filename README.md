@@ -6,7 +6,7 @@
 - Lalu copy paste file .env.example direname menjadi .env
 - Kemudian jalankan perintah 'php artisan migrate:fresh --seed'
 - Jalankan perintah 'php artisan key:generate'
-- Lalu buatlah akun user filament dengan menjalankan perintah 'php artisan make:filament-user'
+- Anda dapat login dengan menggunakan email 'admin@mail.com' dan password 'admin1234', atau jika ingin membuat akun baru dengan menjalankan perintah 'php artisan make:filament-user'
 - Anda sekarang dapat login dan melakukan review. Happy review.
 
 
