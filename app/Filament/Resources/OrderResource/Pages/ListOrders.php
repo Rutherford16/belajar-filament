@@ -7,6 +7,8 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Components\Tab;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListOrders extends ListRecords
 {
@@ -16,6 +18,16 @@ class ListOrders extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            ExportAction::make()->exports([
+                // Pass a string
+                ExcelExport::make('table')
+                    ->fromTable()
+                    ->withFilename(date('Y-m-d') . ' - List all orders')
+                    ->except([
+                        'created_at', 'updated_at', 'deleted_at',
+                    ])
+                    ->withWriterType(\Maatwebsite\Excel\Excel::XLSX),
+            ])
         ];
     }
 

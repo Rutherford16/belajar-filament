@@ -7,7 +7,7 @@
 - Kemudian jalankan perintah 'php artisan migrate:fresh --seed'
 - Jalankan perintah 'php artisan key:generate'
 - Anda dapat login dengan menggunakan email 'admin@mail.com' dan password 'admin1234', atau jika ingin membuat akun baru dengan menjalankan perintah 'php artisan make:filament-user'
-- Anda sekarang dapat login dan melakukan review. Happy review.
+- Happy review.
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
