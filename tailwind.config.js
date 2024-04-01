@@ -2,6 +2,12 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     theme: {
+        colors: {
+            'background' : '#90D26D',
+            'header' : '#2C7865',
+            'hover' : '#FF9800',
+            'text' : '#D9EDBF',
+        },
         extend: {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
