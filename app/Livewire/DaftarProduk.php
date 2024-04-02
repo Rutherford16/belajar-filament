@@ -12,34 +12,12 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Livewire\Component;
 
-class DaftarProduk extends Component implements HasForms, HasTable
+class DaftarProduk extends Component
 {
-    use InteractsWithTable;
-    use InteractsWithForms;
-
-    public function table(Table $table): Table
-    {
-        return $table
-            ->query(Produk::query())
-            ->columns([
-                TextColumn::make('nama'),
-                TextColumn::make('stok'),
-                TextColumn::make('harga'),
-                ImageColumn::make('url_img')->label('Gambar')
-            ])
-            ->filters([
-                // ...
-            ])
-            ->actions([
-                // ...
-            ])
-            ->bulkActions([
-                // ...
-            ]);
-    }
-
     public function render()
     {
-        return view('livewire.daftar-produk');
+        return view('livewire.daftar-produk')->with([
+            'produk' => Produk::all(),
+        ]);
     }
 }
